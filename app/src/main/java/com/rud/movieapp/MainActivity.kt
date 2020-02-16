@@ -1,8 +1,7 @@
-package com.rud.movieapp.view
+package com.rud.movieapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.rud.movieapp.R
 
 class MainActivity : AppCompatActivity() {
 
