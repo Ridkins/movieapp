@@ -1,10 +1,13 @@
 package com.rud.movieapp.view.list.adapter
 
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.rud.domain.models.Movie
+import com.rud.movieapp.BR
 
 class MovieListAdapter(
     private val retry: () -> Unit,
@@ -25,13 +28,13 @@ class MovieListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (getItemViewType(position) == DATA_VIEW_TYPE) {
-            (holder as MovieViewHolder).bind(getItem(position))
-            holder.itemView.setOnClickListener {
-                itemClickCallback?.onItemClick(getItem(position)?.id ?: return@setOnClickListener)
-            }
-
+            val binding = DataBindingUtil.bind<ViewDataBinding>(holder.itemView)
+            binding?.setVariable(BR.model, getItem(position))
+            binding?.setVariable(BR.clickListener, itemClickCallback)
+        } else {
+            val binding = DataBindingUtil.bind<ViewDataBinding>(holder.itemView)
+            binding?.setVariable(BR.state, state)
         }
-        else (holder as LoadingViewHolder).bind(state)
     }
 
     override fun getItemViewType(position: Int): Int {

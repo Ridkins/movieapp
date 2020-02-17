@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.rud.domain.models.Movie" />
+
+        <variable
+            name="clickListener"
+            type="com.rud.movieapp.view.list.adapter.MovieListAdapter.ItemClickCallback" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
+        android:onClick="@{(v)-> clickListener.onItemClick(model.id)}"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardBackgroundColor="#FFF"
@@ -20,6 +36,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
+            app:imageUrl="@{model.posterPath}"
             tools:src="@mipmap/ic_launcher" />
 
         <LinearLayout
@@ -28,29 +45,27 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvMovieTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/space_default"
                 android:textColor="#333"
                 android:textSize="16sp"
-                tools:text="Sample news title" />
+                tools:text="@{model.title}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvReleaseDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/space_default"
                 android:textColor="#333"
                 android:textSize="16sp"
-                tools:text="Sample news title" />
+                tools:text="@{model.releaseDate}" />
 
             <com.iarcuschin.simpleratingbar.SimpleRatingBar
-                android:id="@+id/starsRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="false"
                 android:padding="@dimen/space_default"
+                app:rating="@{model.popularity}"
                 tools:srb_numberOfStars="5"
                 tools:srb_rating="5"
                 tools:srb_starSize="10dp"
@@ -61,3 +76,4 @@
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
+</layout>
