@@ -2,6 +2,7 @@ package com.rud.movieapp.di
 
 import com.google.gson.Gson
 import com.rud.data.MovieWebService
+import com.rud.domain.Constants
 import com.rud.movieapp.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -22,7 +23,7 @@ class NetworkModule {
     @Provides
     fun providesRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)

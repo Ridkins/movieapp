@@ -15,10 +15,14 @@ class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(movie: Movie?) {
         if (movie != null) {
             itemView.tvMovieTitle.text = movie.title
-            Glide.with(itemView.img_news_banner?.context ?: return)
+            itemView.tvReleaseDate.text = movie.releaseDate
+            itemView.starsRating.rating = (movie.popularity / 20).toFloat()
+            itemView.starsRating.setOnTouchListener { _, _ -> true }
+            Glide.with(itemView.ivPhoto?.context ?: return)
                 .load(String.format("%s%s", BuildConfig.BASE_URL_IMG, movie.posterPath))
+                .centerCrop()
                 .placeholder(R.drawable.ic_launcher_background)
-                .into(itemView.img_news_banner ?: return)
+                .into(itemView.ivPhoto ?: return)
         }
     }
 

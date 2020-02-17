@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.rud.domain.models.Movie
 
-class MovieListAdapter(private val retry: () -> Unit) :
+class MovieListAdapter(
+    private val retry: () -> Unit,
+    private val itemClickCallback: ItemClickCallback?
+) :
     PagedListAdapter<Movie, RecyclerView.ViewHolder>(MovieDiffCallback) {
 
     private val DATA_VIEW_TYPE = 1
@@ -21,8 +24,13 @@ class MovieListAdapter(private val retry: () -> Unit) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (getItemViewType(position) == DATA_VIEW_TYPE)
+        if (getItemViewType(position) == DATA_VIEW_TYPE) {
             (holder as MovieViewHolder).bind(getItem(position))
+            holder.itemView.setOnClickListener {
+                itemClickCallback?.onItemClick(getItem(position)?.id ?: return@setOnClickListener)
+            }
+
+        }
         else (holder as LoadingViewHolder).bind(state)
     }
 
@@ -54,4 +62,10 @@ class MovieListAdapter(private val retry: () -> Unit) :
         this.state = state
         notifyItemChanged(super.getItemCount())
     }
+
+
+    interface ItemClickCallback {
+        fun onItemClick(movieId: String)
+    }
+
 }
