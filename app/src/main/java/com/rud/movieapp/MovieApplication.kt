@@ -2,7 +2,7 @@ package com.rud.movieapp
 
 import android.app.Activity
 import android.app.Application
-import com.rud.movieapp.di.DaggerApplicationComponent
+import com.rud.movieapp.di.AppInjector
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -18,9 +18,7 @@ class MovieApplication : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
-        DaggerApplicationComponent.builder().application(this)
-            .build().inject(this)
-
+        AppInjector.init(this)
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
     }
 }
