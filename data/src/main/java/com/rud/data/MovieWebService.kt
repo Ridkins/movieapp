@@ -14,16 +14,14 @@ interface MovieWebService {
     fun getMoviesList(
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
-        @Query("page") pageIndex: Int,
-        @Query("region") region: String?
+        @Query("page") pageIndex: Int
     ): Single<MovieListResponse<Movie>>
 
     @GET("movie/{movie_id}")
     fun getMovieDetails(
-        @Path("movie_id") movieId: Int,
+        @Path("movie_id") movieId: String,
         @Query("api_key") apiKey: String,
-        @Query("language") language: String?,
-        @Query("append_to_response") appendToResponse: String
+        @Query("language") language: String?
     ): Single<Movie>
 
 }

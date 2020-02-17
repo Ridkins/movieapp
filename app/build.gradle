@@ -13,9 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "BASE_URL", '"https://api.themoviedb.org/3/"'
         buildConfigField "String", "BASE_URL_IMG", '"https://image.tmdb.org/t/p/w500"'
-        buildConfigField "String", "MOVIE_API_KEY", '"f03258aa6d81c5710dfc2cb508cc03ca"'
 
     }
     dataBinding {
@@ -60,12 +58,16 @@ dependencies {
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'com.github.ajalt:timberkt:1.5.0'
 
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0-alpha01'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0-alpha01'
 
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
 
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation 'com.iarcuschin:simpleratingbar:0.1.5'
+    implementation 'androidx.lifecycle:lifecycle-livedata-core:2.2.0'
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
