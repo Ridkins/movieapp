@@ -1,6 +1,7 @@
 package com.rud.movieapp.view.base
 
 
+import android.annotation.SuppressLint
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
@@ -9,14 +10,16 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.iarcuschin.simpleratingbar.SimpleRatingBar
 import com.rud.movieapp.BuildConfig
 import com.rud.movieapp.R
+import com.rud.movieapp.view.list.adapter.State
 
 
 object BindingAdapters {
 
     @JvmStatic
     @BindingAdapter("viewVisibility")
-    fun setVisibility(view: View, isVisible: Boolean) {
-        view.visibility = if (isVisible) View.VISIBLE else View.GONE
+    fun setVisibility(view: View, state: State) {
+        view.visibility = if (state == State.LOADING) View.VISIBLE else View.INVISIBLE
+        view.visibility = if (state == State.ERROR) View.VISIBLE else View.INVISIBLE
     }
 
     @JvmStatic
@@ -32,10 +35,12 @@ object BindingAdapters {
             .into(imageView)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @JvmStatic
     @BindingAdapter("rating")
     fun setRating(ratingBar: SimpleRatingBar, popularity: Double) {
         ratingBar.rating = (popularity / 20).toFloat()
+        ratingBar.setOnTouchListener { _, _ -> true }
     }
 
 
