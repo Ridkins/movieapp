@@ -2,11 +2,11 @@ package com.rud.movieapp.view.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.rud.domain.MovieRepository
 import com.rud.domain.models.Movie
+import com.rud.movieapp.view.base.BaseActivityViewModel
 import com.rud.movieapp.view.list.adapter.State
 import com.rud.movieapp.view.list.datasources.MovieDataSource
 import com.rud.movieapp.view.list.datasources.MovieDataSourceFactory
@@ -14,7 +14,7 @@ import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class MovieListViewModel @Inject constructor(private val movieRepository: MovieRepository) :
-    ViewModel() {
+    BaseActivityViewModel() {
 
     var movieList: LiveData<PagedList<Movie>>
     private val compositeDisposable = CompositeDisposable()

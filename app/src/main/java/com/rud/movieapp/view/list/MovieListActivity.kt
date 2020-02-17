@@ -2,48 +2,35 @@ package com.rud.movieapp.view.list
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rud.movieapp.R
+import com.rud.movieapp.databinding.ActivityMovieListBinding
+import com.rud.movieapp.view.base.MvvmActivity
 import com.rud.movieapp.view.list.adapter.MovieListAdapter
 import com.rud.movieapp.view.list.adapter.State
-import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_movie_list.*
-import javax.inject.Inject
 
-class MovieListActivity : AppCompatActivity(), HasSupportFragmentInjector {
+class MovieListActivity : MvvmActivity<ActivityMovieListBinding, MovieListViewModel>() {
 
-    private lateinit var viewModel: MovieListViewModel
-    private lateinit var newsListAdapter: MovieListAdapter
-    @Inject
-    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+    private lateinit var movieListAdapter: MovieListAdapter
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentInjector
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_list)
-        viewModel = ViewModelProviders.of(this)
-            .get(MovieListViewModel::class.java)
+        setAndBindContentView(this, savedInstanceState, R.layout.activity_movie_list)
         initAdapter()
         initState()
     }
 
     private fun initAdapter() {
-        newsListAdapter =
+        movieListAdapter =
             MovieListAdapter { viewModel.retry() }
         recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        recyclerView.adapter = newsListAdapter
+        recyclerView.adapter = movieListAdapter
         viewModel.movieList.observe(this, Observer {
-            newsListAdapter.submitList(it)
+            movieListAdapter.submitList(it)
         })
     }
 
@@ -55,7 +42,7 @@ class MovieListActivity : AppCompatActivity(), HasSupportFragmentInjector {
             tvError.visibility =
                 if (viewModel.listIsEmpty() && state == State.ERROR) View.VISIBLE else View.GONE
             if (!viewModel.listIsEmpty()) {
-                newsListAdapter.setState(state ?: State.DONE)
+                movieListAdapter.setState(state ?: State.DONE)
             }
         })
     }

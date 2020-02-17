@@ -14,7 +14,7 @@ class MovieRepositoryImpl(
     override fun getMovieList(pageIndex: Int, pageSize: Int): Single<List<Movie>> {
         return movieWebService.getMoviesList(
             "f03258aa6d81c5710dfc2cb508cc03ca",
-            "ru",
+            "us",
             pageIndex,
             null
         )

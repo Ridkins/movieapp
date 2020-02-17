@@ -17,10 +17,10 @@ import java.util.concurrent.TimeUnit
 class NetworkModule {
 
     @Provides
-    fun provideMovieApi(retrofit: Retrofit?) = retrofit?.create(MovieWebService::class.java)
+    fun provideMovieApi(retrofit: Retrofit) = retrofit.create(MovieWebService::class.java)
 
     @Provides
-    fun providesRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit? =
+    fun providesRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
