@@ -8,6 +8,7 @@
             name="state"
             type="com.rud.movieapp.view.list.adapter.State" />
 
+        <import type="com.rud.movieapp.view.list.adapter.State" />
     </data>
 
     <RelativeLayout
@@ -20,7 +21,7 @@
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:viewVisibility="@{state}"
+        app:viewVisibility="@{state == State.LOADING}"
         android:layout_centerInParent="true" />
 
     <TextView
@@ -28,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        app:viewVisibility="@{state}"
+        app:viewVisibility="@{state == State.ERROR}"
         android:text="@string/error_tap_to_retry" />
 
 </RelativeLayout>

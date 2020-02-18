@@ -1,6 +1,8 @@
 package com.rud.movieapp.view.detail
 
 import androidx.databinding.ObservableField
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.OnLifecycleEvent
 import com.rud.domain.MovieRepository
 import com.rud.domain.models.Movie
 import com.rud.movieapp.view.base.BaseActivityViewModel
@@ -32,8 +34,9 @@ class MovieDetailViewModel @Inject constructor(private val movieRepository: Movi
     }
 
 
-    override fun onCleared() {
-        super.onCleared()
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onDestroy() {
         compositeDisposable.dispose()
     }
+
 }

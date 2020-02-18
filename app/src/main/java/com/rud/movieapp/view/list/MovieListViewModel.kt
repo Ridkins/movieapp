@@ -1,6 +1,8 @@
 package com.rud.movieapp.view.list
 
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -43,8 +45,10 @@ class MovieListViewModel @Inject constructor(private val movieRepository: MovieR
         return movieList.value?.isEmpty() ?: true
     }
 
-    override fun onCleared() {
-        super.onCleared()
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onDestroy() {
         compositeDisposable.dispose()
     }
+
 }

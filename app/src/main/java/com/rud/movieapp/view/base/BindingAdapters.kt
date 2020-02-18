@@ -10,16 +10,14 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.iarcuschin.simpleratingbar.SimpleRatingBar
 import com.rud.movieapp.BuildConfig
 import com.rud.movieapp.R
-import com.rud.movieapp.view.list.adapter.State
 
 
 object BindingAdapters {
 
     @JvmStatic
     @BindingAdapter("viewVisibility")
-    fun setVisibility(view: View, state: State) {
-        view.visibility = if (state == State.LOADING) View.VISIBLE else View.INVISIBLE
-        view.visibility = if (state == State.ERROR) View.VISIBLE else View.INVISIBLE
+    fun setVisibility(view: View, isVisible: Boolean) {
+        view.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
     @JvmStatic
