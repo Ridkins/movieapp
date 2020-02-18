@@ -12,8 +12,8 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBuildersModule {
 
     @ContributesAndroidInjector(modules = [MovieListActivityModule::class, FragmentBuildersModule::class])
-    abstract fun contributeMovieListActivity(): MovieListActivity?
+    abstract fun contributeMovieListActivity(): MovieListActivity
 
     @ContributesAndroidInjector(modules = [MovieDetailActivityModule::class, FragmentBuildersModule::class])
-    abstract fun contributeMovieDetailActivity(): MovieDetailActivity?
+    abstract fun contributeMovieDetailActivity(): MovieDetailActivity
 }

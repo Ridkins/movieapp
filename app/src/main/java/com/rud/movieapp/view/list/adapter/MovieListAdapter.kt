@@ -29,8 +29,10 @@ class MovieListAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (getItemViewType(position) == DATA_VIEW_TYPE) {
             val binding = DataBindingUtil.bind<ViewDataBinding>(holder.itemView)
-            binding?.setVariable(BR.model, getItem(position))
-            binding?.setVariable(BR.clickListener, itemClickCallback)
+            binding?.let {
+                it.setVariable(BR.model, getItem(position))
+                it.setVariable(BR.clickListener, itemClickCallback)
+            }
         } else {
             val binding = DataBindingUtil.bind<ViewDataBinding>(holder.itemView)
             binding?.setVariable(BR.state, state)

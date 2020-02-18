@@ -23,8 +23,9 @@
         android:id="@+id/tvError"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:onClick="@{(v)-> vm.retry()}"
         android:gravity="center"
-        android:text="ERROR !! Tap to retry." />
+        android:text="@string/error_tap_to_retry" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

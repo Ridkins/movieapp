@@ -13,7 +13,6 @@ class MovieApplication : Application(), HasActivityInjector {
 
     @Inject
     lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
-
     override fun activityInjector(): AndroidInjector<Activity> = dispatchingActivityInjector
 
     override fun onCreate() {

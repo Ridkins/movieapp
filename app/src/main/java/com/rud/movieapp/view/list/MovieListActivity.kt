@@ -45,7 +45,6 @@ class MovieListActivity : MvvmActivity<ActivityMovieListBinding, MovieListViewMo
     }
 
     private fun initState() {
-        tvError.setOnClickListener { viewModel.retry() }
         viewModel.getState().observe(this, Observer { state ->
             progressBar.visibility =
                 if (viewModel.listIsEmpty() && state == State.LOADING) View.VISIBLE else View.GONE
